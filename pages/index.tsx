@@ -5,27 +5,27 @@ import TodoUI from '../component/todoUI';
 
 var todo: string[] = [];
 var TODOS = [todo, ...todo];
-const index = () => {
-  const [userInput, setuserInput] = useState<string>("");
-  const [submitInput, setsubmitInput] = useState<typeof TODOS>([]);
+const Index = () => {
+  const [UserInput, setuserInput] = useState<string>("");
+  const [SubmitInput, setsubmitInput] = useState<typeof TODOS>([]);
 
   const onChangeHandler = (e: any) => { // e = event (values)
     e.preventDefault();
     setuserInput(e.target.value);
     console.log(typeof e.target.value);
-    console.log(userInput);
+    console.log(UserInput);
   }
 
   const onClickHandler = (e: any) => {
     e.preventDefault();
     setsubmitInput([
-      userInput, ...submitInput
+      UserInput, ...SubmitInput
     ])
     setuserInput(" ");
   }
 
   const onDeleteHandler = (todos: any) => {
-    setsubmitInput(submitInput.filter((todo1) => {
+    setsubmitInput(SubmitInput.filter((todo1) => {
       return todo1 != todos
     }));
   }
@@ -65,11 +65,11 @@ const index = () => {
         <h1 className='text-3xl text-center font-bold font-serif mt-10'>{day2}</h1>
         <h1 className='text-1xl text-gray-500 text-center font-san'>{currentDate}</h1>
         <form action="">
-          <br /><input className="px-5 w-64 mx-3 h-7 bg-gray-300 text-black rounded-sm" type="text" placeholder='Enter a todo...' value={userInput} onChange={onChangeHandler} /><button onClick={onClickHandler} className="m-4 bg-gray-500 rounded-sm"></button>
+          <br /><input className="px-5 w-64 mx-3 h-7 bg-gray-300 text-black rounded-sm" type="text" placeholder='Enter a todo...' value={UserInput} onChange={onChangeHandler} /><button onClick={onClickHandler} className="m-4 bg-gray-500 rounded-sm"></button>
           <ul>
             {
-              submitInput.length >= 1 ? submitInput.map((todo, uniqueIndex) => {
-                return <div className='flex justify-between my-1 mx-2'> <li key={uniqueIndex}><TodoUI key={uniqueIndex} myValue={todo}></TodoUI> <hr /> </li> <button className='bg-red-800 text-gray-100 px-1 text-sm h-5 mt-2' onClick={(e) => { e.preventDefault(); onDeleteHandler(todo); }}>Dlt</button></div>
+              SubmitInput.length >= 1 ? SubmitInput.map((todo, key) => {
+                return <div className='flex justify-between my-1 mx-2'key={key} > <li><TodoUI key={key} myValue={todo}></TodoUI> <hr /> </li> <button className='bg-red-800 text-gray-100 px-1 text-sm h-5 mt-2' onClick={(e) => { e.preventDefault(); onDeleteHandler(todo); }}>Dlt</button></div>
               }) : <p className='mx-2'>Enter a todo into the list</p>
             }
           </ul>
@@ -79,4 +79,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index
